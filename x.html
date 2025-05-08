@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج التسجيل</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            direction: rtl;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        h1 {
+            margin-bottom: 2rem;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: right;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s ease;
+        }
+        
+        input:focus, textarea:focus {
+            border-color: #a777e3;
+            outline: none;
+        }
+        
+        button {
+            background: linear-gradient(to right, #6e8efb, #a777e3);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .success-message {
+            display: none;
+            color: #28a745;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 1.5rem;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>سجل معنا الآن</h1>
+        <form id="contact-form">
+            <div class="form-group">
+                <label for="phone">رقم الهاتف</label>
+                <input type="tel" id="phone" name="phone" placeholder="أدخل رقم الهاتف" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">العنوان</label>
+                <textarea id="address" name="address" rows="3" placeholder="أدخل العنوان بالتفصيل" required></textarea>
+            </div>
+            
+            <button type="submit">إرسال</button>
+            
+            <p id="success-message" class="success-message">تم الإرسال بنجاح، سنتواصل معك قريباً!</p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            
+            // هنا يمكنك إضافة التحقق من صحة البيانات
+            if (phone.length < 8) {
+                alert("الرجاء إدخال رقم هاتف صحيح");
+                return;
+            }
+            
+            if (address.length < 5) {
+                alert("الرجاء إدخال عنوان مفصل");
+                return;
+            }
+            
+            // في التطبيق الحقيقي، هنا سيتم إرسال البيانات للخادم
+            console.log("تم استلام البيانات:", {phone, address});
+            
+            // عرض رسالة النجاح
+            document.getElementById('success-message').style.display = 'block';
+            
+            // مسح النموذج
+            this.reset();
+            
+            // إخفاء رسالة النجاح بعد 3 ثواني
+            setTimeout(() => {
+                document.getElementById('success-message').style.display = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
